@@ -211,11 +211,13 @@ extension Rational {
     /* TODO: least common multiple 2015-12-30 */
 }
 
-
-infix operator ** {
-associativity left
-precedence 240
+precedencegroup ExponentiativePrecedence {
+    associativity: right // TODO(btc): odd it was left
+    higherThan: MultiplicationPrecedence
 }
+
+infix operator **: ExponentiativePrecedence
+
 
 internal func **(base: Int, power: Int) -> Int {
     return (0..<power).reduce(1) { (accum, _) -> Int in accum * base }
